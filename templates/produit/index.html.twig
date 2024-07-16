@@ -1,0 +1,85 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function translateToFrench() {
+        var el = document.getElementById("google_translate_element").querySelector(".goog-te-combo");
+        el.value = "fr";
+        el.dispatchEvent(new Event('change'));
+    }
+
+    function translateToEnglish() {
+        var el = document.getElementById("google_translate_element").querySelector(".goog-te-combo");
+        el.value = "en";
+        el.dispatchEvent(new Event('change'));
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'fr', includedLanguages: 'en', autoDisplay: false}, 'google_translate_element');
+    }
+</script>
+
+
+    <h1>Liste des produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                
+                <th>Nom</th>
+                 <th>Categorie</th>
+
+                <th>Description</th>
+                <th>prix</th>
+                <th>Qte</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.nom }}</td>
+                <td>{% if produit.category %}
+                    {{ produit.category.getNom() }}
+                {% else %}
+                    <span class="text-muted">N/A</span>
+                {% endif %}
+                </td>
+
+                
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.prix  }}</td>
+                <td>{{ produit.Qte  }}</td>
+                <td><img src="{{ asset('uploads/produit/' ~ produit.image) }}" alt="image "style="width:200px;"></td>
+                <td>
+                     <a class="btn btn-outline-info" style="width: 100px; " href="{{ path('app_produit_show', {'id':produit.id}) }}">Détails</a><br>
+                    <a  class="btn btn-outline-primary" style="width: 100px; " href="{{ path('app_produit_edit', {'id': produit.id}) }}">modifier</a><br>
+                     <a  class="btn btn-outline-danger" style="width: 100px; " onclick="return confirm('Are you sure you want to delete this item?')" href="{{ path('app_produit_delete', {'id': produit.id}) }}">supprimer</a><br>
+                   
+                  
+    <!-- Vos champs de formulaire -->
+    <button type="submit">Confirmer</button>
+</form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+
+
+    <a class="btn btn-outline-success" style="width: 110px; " href="{{ path('app_produit_new') }}">Ajouter</a>
+      
+                 
+{% endblock %}

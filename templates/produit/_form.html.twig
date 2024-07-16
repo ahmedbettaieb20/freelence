@@ -1,0 +1,69 @@
+{% block stylesheets %}
+   
+    <style>
+        /* Style personnalisé pour le titre "Demande de congé" */
+        .mt-4  {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .error {
+    color: red;
+}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        
+        <div class="row">
+       
+            <div class="col-md-6 offset-md-3">
+             
+                {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                 <div class="form-group">
+                        {{ form_label(form.nom, 'Nom du produit') }}
+                        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description, 'Description') }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Entrez une description'}}) }}
+                        {{ form_errors(form.description) }}
+                        
+                    </div>
+                   
+                    <div class="form-group">
+                        {{ form_label(form.prix, 'Prix') }}
+                        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.prix) }}
+                    </div>
+                    
+                     <div class="form-group">
+                        {{ form_label(form.Qte, 'Qantité') }}
+                        {{ form_widget(form.Qte, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.Qte) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.category, 'id category') }}
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.category) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.image, 'id category') }}
+                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.image) }}
+                    </div>
+                    
+                   
+                    <div class="form-group text-center">
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

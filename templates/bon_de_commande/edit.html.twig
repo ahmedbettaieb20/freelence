@@ -1,0 +1,11 @@
+{% extends 'back_base.html.twig' %}
+
+{% block body %}
+    <h1>Edit BonDeCommande</h1>
+
+    {{ include('bon_de_commande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_bon_de_commande_index') }}">back to list</a>
+
+    {{ include('bon_de_commande/_delete_form.html.twig') }}
+{% endblock %}
