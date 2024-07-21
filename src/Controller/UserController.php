@@ -70,7 +70,7 @@ class UserController extends AbstractController
             $em = $managerRegistry->getManager();
             $em->persist($user);
             $user->setCreatedAt(new \DateTimeImmutable());
-            $user->setEmail(strtolower($user->getFirstName()) . "." . strtolower($user->getLastName()) . "@siyahi.tn");
+            $user->setEmail(strtolower($user->getFirstName()) . "." . strtolower($user->getLastName()) . "@castor.tn");
             $pass = self::generate();
             $hashedPassword = $passwordHasher->hashPassword($user, $pass);
             $user->setPassword($hashedPassword);
@@ -80,7 +80,7 @@ class UserController extends AbstractController
                 $user->setImage("b56ef85920323ead69e5f0d1ca13a0cd.png");
             $user->setActivity('T');
             $email = (new TemplatedEmail())
-                ->from(new Address('no-reply@siyahi.tn'))
+                ->from(new Address('no-reply@castor.tn'))
                 ->to($user->getOldEmail())
                 ->subject('Account Creation')
                 ->htmlTemplate('user/email.html.twig')
@@ -214,4 +214,38 @@ class UserController extends AbstractController
 
         return $this->render('user/chart.html.twig');
     }
+    
+   
+    #[Route('/admin/clients', name: 'admin_clients')]
+    public function listClients(UserRepository $repository, Request $request)
+    {
+        $users = $repository->findAll();
+        $form= $this->createForm(SearchUserType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $name= $form->getData()->getFirstName();
+            return $this->render('user/clients.html.twig', array('tabUsers' => $users, 'users' => $repository->searchUser($name), 'searchForm'=>$form->createView()));
+        }
+
+        return $this->render('user/clients.html.twig', array('tabUsers' => $users, 'searchForm'=>$form->createView()));
+    }
+
+    public static function generate1(int $length = 8): string
+    {
+        $characters = implode('', array_merge(
+            range('a', 'z'),
+            range('A', 'Z'),
+            range(0, 9)
+        ));
+
+        $randomString = '';
+        $max = strlen($characters) - 1;
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $max)];
+        }
+
+        return $randomString;
+    }
+
 }

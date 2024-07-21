@@ -63,12 +63,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 1)]
     private ?string $activity = null;
 
-    #[ORM\OneToMany(mappedBy: 'nomComercial', targetEntity: BonDeCommande::class)]
+   
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Categorie::class)]
+    private Collection $categories;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: BonDeCommande::class)]
     private Collection $bonDeCommandes;
+
+    
 
     public function __construct()
     {
+        
+        $this->categories = new ArrayCollection();
         $this->bonDeCommandes = new ArrayCollection();
+        
     }
 
     
@@ -113,6 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
+        
 
         return array_unique($roles);
     }
@@ -286,6 +297,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->First_Name . ' ' . $this->Last_Name;
     }
 
+   
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getUser() === $this) {
+                $category->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, BonDeCommande>
      */
@@ -298,7 +340,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->bonDeCommandes->contains($bonDeCommande)) {
             $this->bonDeCommandes->add($bonDeCommande);
-            $bonDeCommande->setNomComercial($this);
+            $bonDeCommande->setUser($this);
         }
 
         return $this;
@@ -308,11 +350,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->bonDeCommandes->removeElement($bonDeCommande)) {
             // set the owning side to null (unless already changed)
-            if ($bonDeCommande->getNomComercial() === $this) {
-                $bonDeCommande->setNomComercial(null);
+            if ($bonDeCommande->getUser() === $this) {
+                $bonDeCommande->setUser(null);
             }
         }
 
         return $this;
     }
+
+    
 }

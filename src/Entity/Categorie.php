@@ -24,9 +24,22 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produit::class)]
     private Collection $produits;
 
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Depense::class)]
+    private Collection $depenses;
+
+    
+
+    
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->depenses = new ArrayCollection();
+        
+        
     }
 
     public function getId(): ?int
@@ -87,4 +100,50 @@ class Categorie
 
         return $this;
     }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Depense>
+     */
+    public function getDepenses(): Collection
+    {
+        return $this->depenses;
+    }
+
+    public function addDepense(Depense $depense): static
+    {
+        if (!$this->depenses->contains($depense)) {
+            $this->depenses->add($depense);
+            $depense->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepense(Depense $depense): static
+    {
+        if ($this->depenses->removeElement($depense)) {
+            // set the owning side to null (unless already changed)
+            if ($depense->getCategorie() === $this) {
+                $depense->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+
+    
 }

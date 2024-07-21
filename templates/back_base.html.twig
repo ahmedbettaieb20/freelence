@@ -90,12 +90,7 @@
                         </li>
                         </ul>
                         </li>
-                        {% endif %}
-                        {% if is_granted("ROLE_ADMIN") %}
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Commercial Panel</span>
-                </li>
-                     <li class="menu-item">
+                         <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Account Settings">Produit Section</div>
@@ -131,6 +126,70 @@
                         </li>
                         </ul>
                         </li>
+                        
+                        
+                         <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Account Settings">BonDeCommande Section</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ path('app_bon_de_commande_indexb') }}" class="menu-link">
+                                    <div data-i18n="Account">List BonDeCommande</div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        </li>
+                         <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Account Settings">Depense Section</div>
+                        </a>
+                         <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ path('app_depense_new') }}" class="menu-link">
+                                    <div data-i18n="Account">Add Depense</div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ path('app_depense_index') }}" class="menu-link">
+                                    <div data-i18n="Account">List Depense</div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        </li>
+                        {% endif %}
+                        {% if is_granted("ROLE_ADMIN") %}
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Commercial Panel</span>
+                </li>
+                    
+                        <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Account Settings">BonDeCommande Section</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ path('app_bon_de_commande_new') }}" class="menu-link">
+                                    <div data-i18n="Account">Add New BonDeCommande</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ path('app_bon_de_commande_index') }}" class="menu-link">
+                                    <div data-i18n="Account">List BonDeCommande</div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        </li>
+                        
                         {% endif %}
                        
             </ul>

@@ -37,8 +37,8 @@
 <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">siyahi-contact@siyahi.tn</a></i>
-            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+216 95 052 214</span></i>
+            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">castor-contact@castor.tn</a></i>
+            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+216 12345678</span></i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -66,15 +66,20 @@
                     {% if is_granted("ROLE_USER") %}
                         <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="#">Operation</a></li>
-                                <li class="dropdown"><a href="#"><span>Credit</span> <i class="bi bi-chevron-right"></i></a>
-                                    <ul>
-                                        <li><a href="{{ path('app_credit_new') }}">Produits</a></li>
+                                
+                                        <li><a href="{{ path('app_cards_index') }}">Produits</a></li>
                                         
-                                    </ul>
-                                </li>
-                                <li><a href="#">Achat</a></li>
-                                <li><a href="#">Reclamation</a></li>
+                                    
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if is_granted("ROLE_STAFF") %}
+                        <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                
+                                        <li><a href="{{ path('app_cards_index') }}">Produits</a></li>
+                                        
+                                    
                             </ul>
                         </li>
                     {% endif %}
@@ -118,7 +123,7 @@
                         ESPRIT Business <br>
                         La Gazelle, Ariana <br>
                         Tunisia <br><br>
-                        <strong>Phone:</strong> +216 95 123 456<br>
+                        <strong>Phone:</strong> +216 12345678<br>
                         <strong>Email:</strong> castor-info@castor.tn<br>
                     </p>
                 </div>

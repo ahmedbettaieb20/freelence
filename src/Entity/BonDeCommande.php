@@ -32,7 +32,9 @@ class BonDeCommande
     private ?Produit $produit = null;
 
     #[ORM\ManyToOne(inversedBy: 'bonDeCommandes')]
-    private ?User $nomComercial = null;
+    private ?User $User = null;
+
+   
 
     public function getId(): ?int
     {
@@ -101,15 +103,17 @@ class BonDeCommande
         return $this;
     }
 
-    public function getNomComercial(): ?User
+    public function getUser(): ?user
     {
-        return $this->nomComercial;
+        return $this->User;
     }
 
-    public function setNomComercial(?User $nomComercial): static
+    public function setUser(?user $User): static
     {
-        $this->nomComercial = $nomComercial;
+        $this->User = $User;
 
         return $this;
     }
+
+    
 }

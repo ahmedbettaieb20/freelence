@@ -24,30 +24,25 @@
             <div class="col-md-6 offset-md-3">
              
                 {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
-                <div class="form-group">
-                        {{ form_label(form.produit, 'id produit') }}
-                        {{ form_widget(form.produit, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.produit) }}
+                
+                  
+                    <div class="form-group">
+                        {{ form_label(form.categorie, 'id category') }}
+                        {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.categorie) }}
                     </div>
-                 <div class="form-group">
-                        {{ form_label(form.montant, 'Montant') }}
+                    <div class="form-group">
+                        {{ form_label(form.montant, 'monatant') }}
                         {{ form_widget(form.montant, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.montant) }}
                     </div>
-                    <div class="form-group">
-                        {{ form_label(form.quantite, 'Quantité') }}
-                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.quantite) }}
-                        
-                    </div>
-                   
-                    
                      <div class="form-group">
                         {{ form_label(form.date, 'Date') }}
                         {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.date) }}
                     </div>
                     
+                   
                     <div class="form-group text-center">
                         {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
                     </div>

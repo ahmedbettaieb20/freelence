@@ -21,6 +21,13 @@ class ProduitController extends AbstractController
             'produits' => $produitRepository->findAll(),
         ]);
     }
+    #[Route('/cards', name: 'app_cards_index', methods: ['GET'])]
+    public function index1(ProduitRepository $produitRepository): Response
+    {
+        return $this->render('produit/cards.html.twig', [
+            'produits' => $produitRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

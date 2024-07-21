@@ -86,9 +86,9 @@ class EditUserType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Super Admin' => 'ROLE_SUPER_ADMIN',
-                    'Admin' => 'ROLE_ADMIN',
-                    'Staff' => 'ROLE_STAFF',
-                    'User' => 'ROLE_USER'
+                    'Commercial' => 'ROLE_ADMIN',
+                    'fournisseur' => 'ROLE_STAFF',
+                    'Client' => 'ROLE_USER'
                 ],
                 'expanded' => true,
                 'multiple' => true

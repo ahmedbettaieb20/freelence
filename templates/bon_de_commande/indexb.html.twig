@@ -31,23 +31,27 @@
                 <th>Id</th>
                 
                 <th>Produit</th>
-                    
+                      <th>Nom Commercial</th>
                  <th>montant</th>
            
 
                 <th>Quantité</th>
                 <th>Statut</th>
                 <th>date</th>
-                <th>actions</th>
                 
             </tr>
         </thead>
         <tbody>
-        {% for commande in bon_de_commandes %}
+        {% for commande in bon_de_commande %}
             <tr>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.Produit.id }}</td>
-                
+                <td>{% if commande.User %}
+                    {{ commande.User.getFirstName() }}
+                {% else %}
+                    <span class="text-muted">N/A</span>
+                {% endif %}
+                </td>
 
                 
                 <td>{{ commande.montant }}</td>
@@ -56,12 +60,12 @@
                 <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
                 <td>
                      <a class="btn btn-outline-info" style="width: 100px; " href="{{ path('app_bon_de_commande_show', {'id':commande.id}) }}">Détails</a><br>
-                    <a  class="btn btn-outline-primary" style="width: 100px; " href="{{ path('app_bon_de_commande_edit', {'id': commande.id}) }}">modifier</a><br>
-                     <a  class="btn btn-outline-danger" style="width: 100px; " onclick="return confirm('Are you sure you want to delete this item?')" href="{{ path('app_bon_de_commande_delete', {'id': commande.id}) }}">supprimer</a><br></td>
+                    <a  class="btn btn-outline-primary" style="width: 100px; " href="{{ path('app_bon_de_commande_edit', {'id': commande.id}) }}">Valider</a><br>
+                     
                    
-                  
+                  </td>
     <!-- Vos champs de formulaire -->
-    
+   
 </form>
                 </td>
             </tr>
@@ -76,7 +80,7 @@
     <div>
 
 
-    <a class="btn btn-outline-success" style="width: 110px; " href="{{ path('app_bon_de_commande_new') }}">Ajouter</a>
+    
       
                  
 {% endblock %}

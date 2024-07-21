@@ -36,6 +36,9 @@ class Produit
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->bonDeCommandes = new ArrayCollection();
@@ -144,6 +147,18 @@ class Produit
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

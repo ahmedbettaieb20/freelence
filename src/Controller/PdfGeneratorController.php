@@ -30,8 +30,8 @@ class PdfGeneratorController extends AbstractController
         $label = Label::create('')->setFont(new NotoSans(8));
         $qrCode = $writer->write($qrCode, null)->getDataUri();
         $data = [
-            'LogoSrc'=> $this->imageToBase64($this->getParameter('kernel.project_dir') . '/public/front/assets/img/s-logo.png'),
-            'ImageSrc'  => $this->imageToBase64($user->getImage()),
+            
+            
             'FirstName'         => $user->getFirstName(),
             'LastName'         => $user->getLastName(),
             'Gender' => $user->getGender(),

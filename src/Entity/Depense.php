@@ -14,40 +14,34 @@ class Depense
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $categorie = null;
+   
 
     #[ORM\Column]
-    private ?float $mantant = null;
+    private ?float $montant = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'depenses')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'depenses')]
+    private ?Categorie $categorie = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategorie(): ?string
+   
+    public function getMontant(): ?float
     {
-        return $this->categorie;
+        return $this->montant;
     }
 
-    public function setCategorie(string $categorie): static
+    public function setMontant(float $montant): static
     {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getMantant(): ?float
-    {
-        return $this->mantant;
-    }
-
-    public function setMantant(float $mantant): static
-    {
-        $this->mantant = $mantant;
+        $this->montant = $montant;
 
         return $this;
     }
@@ -60,6 +54,30 @@ class Depense
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?categorie $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
