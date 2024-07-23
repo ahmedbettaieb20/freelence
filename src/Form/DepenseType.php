@@ -16,20 +16,16 @@ class DepenseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('description')
             ->add('montant')
-            ->add('date',DateTimeType::class, [
+            ->add('date', DateTimeType::class, [
                 'data' => new \DateTime(),
                 'years' => range(date("Y"), date("Y") + 10),
                 'widget' => 'single_text',
             ])
-            ->add('categorie', EntityType::class, [
-                'class' => Categorie::class,
-                'choice_label' => 'nom', // ou tout autre champ que vous souhaitez afficher
-            ])
-            ->add('submit',SubmitType::class,[
-                'label'=>"confirmé ",
-            ])
-        ;
+            ->add('submit', SubmitType::class, [
+                'label' => "Confirmé",
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

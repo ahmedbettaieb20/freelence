@@ -25,8 +25,10 @@ class Depense
     #[ORM\ManyToOne(inversedBy: 'depenses')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'depenses')]
-    private ?Categorie $categorie = null;
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    
 
     public function getId(): ?int
     {
@@ -70,15 +72,16 @@ class Depense
         return $this;
     }
 
-    public function getCategorie(): ?categorie
+    public function getDescription(): ?string
     {
-        return $this->categorie;
+        return $this->description;
     }
 
-    public function setCategorie(?categorie $categorie): static
+    public function setDescription(string $description): static
     {
-        $this->categorie = $categorie;
+        $this->description = $description;
 
         return $this;
     }
+
 }

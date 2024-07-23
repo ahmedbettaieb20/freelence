@@ -23,13 +23,15 @@ class BonDeCommandeType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('montant')
+            ->add('statut')
             ->add('quantite')
             
-            ->add('statut')
+            
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
                 'choice_label' => 'nom', // ou tout autre champ que vous souhaitez afficher
             ])
+            
            
                 ->add('submit',SubmitType::class,[
                     'label'=>"confirmer",

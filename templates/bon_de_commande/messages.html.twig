@@ -1,0 +1,18 @@
+{# templates/bon_de_commande/messages.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% for label, messages in app.flashes %}
+        <div class="flash {{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</body>
+</html>

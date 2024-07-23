@@ -1,7 +1,6 @@
 {% block stylesheets %}
-   
     <style>
-        /* Style personnalisé pour le titre "Demande de congé" */
+     
         .mt-4  {
             text-align: center;
             font-size: 2.5rem;
@@ -11,46 +10,59 @@
             letter-spacing: 2px;
         }
         .error {
-    color: red;
-}
+            color: red;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        
         <div class="row">
-       
             <div class="col-md-6 offset-md-3">
-             
+                <h2 class="mt-4">Ajouter un Bon de Commande</h2>
+
+                {% for label, messages in app.flashes %}
+                    {% if label == 'error' %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
                 {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
                 <div class="form-group">
-                        {{ form_label(form.produit, 'id produit') }}
-                        {{ form_widget(form.produit, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.produit) }}
-                    </div>
-                 <div class="form-group">
-                        {{ form_label(form.montant, 'Montant') }}
-                        {{ form_widget(form.montant, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.montant) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.quantite, 'Quantité') }}
-                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.quantite) }}
-                        
-                    </div>
-                   
-                    
-                     <div class="form-group">
-                        {{ form_label(form.date, 'Date') }}
-                        {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.date) }}
-                    </div>
-                    
-                    <div class="form-group text-center">
-                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-                    </div>
+                    {{ form_label(form.produit, 'id produit') }}
+                    {{ form_widget(form.produit, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.produit) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.montant, 'Montant') }}
+                    {{ form_widget(form.montant, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.montant) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.quantite, 'Quantité') }}
+                    {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.quantite) }}
+                </div>
+                <div class="form-group hidden">
+                    {{ form_label(form.statut, 'Statut') }}
+                    {{ form_widget(form.statut, {'attr': {'class': 'form-control hidden'}}) }}
+                    {{ form_errors(form.statut) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.date, 'Date') }}
+                    {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.date) }}
+                </div>
+                <div class="form-group text-center">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
                 {{ form_end(form) }}
             </div>
         </div>

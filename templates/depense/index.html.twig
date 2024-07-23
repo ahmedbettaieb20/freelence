@@ -23,14 +23,14 @@
 </script>
 
 
-    <h1>Liste des produits</h1>
+    <h1>Liste des depenses</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 
-                <th>Categorie</th>
+                <th>Description</th>
                  <th>monatant</th>
                   <th>Date</th>
 
@@ -42,13 +42,9 @@
         {% for depense in depenses %}
             <tr>
                 <td>{{ depense.id }}</td>
+                <td>{{ depense.description }}</td>
                
-                <td>{% if depense.categorie %}
-                    {{ depense.categorie.getNom() }}
-                {% else %}
-                    <span class="text-muted">N/A</span>
-                {% endif %}
-                </td>
+                
 
                 
                 <td>{{ depense.montant }}</td>
@@ -62,7 +58,7 @@
                    
                   
     <!-- Vos champs de formulaire -->
-    <button type="submit">Confirmer</button>
+    
 </form>
                 </td>
             </tr>

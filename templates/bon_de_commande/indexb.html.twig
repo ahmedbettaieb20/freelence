@@ -59,11 +59,12 @@
                 <td>{{ commande.statut ? 'Actif' : 'Inactif' }}</td>
                 <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
                 <td>
-                     <a class="btn btn-outline-info" style="width: 100px; " href="{{ path('app_bon_de_commande_show', {'id':commande.id}) }}">Détails</a><br>
-                    <a  class="btn btn-outline-primary" style="width: 100px; " href="{{ path('app_bon_de_commande_edit', {'id': commande.id}) }}">Valider</a><br>
-                     
-                   
-                  </td>
+                        {% if commande.Produit.getQte() <= 1 %}
+                            <span class="alert-icon" title="Stock faible">⚠️</span>
+                        {% endif %}
+                        <a href="{{ path('app_bon_de_commande_show', {'id': commande.id}) }}">Voir</a>
+                        <a href="{{ path('app_bon_de_commande_edit', {'id': commande.id}) }}">Modifier</a>
+                    </td>
     <!-- Vos champs de formulaire -->
    
 </form>

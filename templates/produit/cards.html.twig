@@ -21,7 +21,7 @@
                         <p class="card-text">{{ produit.description|slice(0, 100) ~ '...' }}</p>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="badge bg-primary">{{ produit.prix }}DT</span>
-                            <span class="badge bg-success">{{ produit.Qte }} en stock</span>
+                           
                         </div>
                         <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-outline-primary btn-block mt-auto">Voir Détails</a>
                     </div>

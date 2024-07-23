@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="front/assets/img/logo.png" rel="icon">
+    <link href="front/assets/img/s-logo.png" rel="icon">
     <link href="front/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -73,7 +73,7 @@
                             </ul>
                         </li>
                     {% endif %}
-                    {% if is_granted("ROLE_STAFF") %}
+                    
                         <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
                                 
@@ -82,7 +82,7 @@
                                     
                             </ul>
                         </li>
-                    {% endif %}
+                    
                     {% if is_granted("ROLE_USER") %}
                         <li><a class="nav-link scrollto" href="{{ path('user_account', { id: app.user.id }) }}">Account</a></li>
                     {% endif %}

@@ -19,11 +19,16 @@
             </tr>
             <tr>
                 <th>Qantite</th>
-                <td>{{ bon_de_commande.qantite }}</td>
+                <td>{{ bon_de_commande.quantite }}</td>
             </tr>
             <tr>
                 <th>NomComercial</th>
-                <td>{{ bon_de_commande.nomComercial }}</td>
+                 <td>{% if bon_de_commande.User %}
+                    {{ bon_de_commande.User.getFirstName() }}
+                {% else %}
+                    <span class="text-muted">N/A</span>
+                {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Statut</th>

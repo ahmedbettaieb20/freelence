@@ -40,28 +40,42 @@ class BonDeCommandeController extends AbstractController
     {
         $bonDeCommande = new BonDeCommande();
         $form = $this->createForm(BonDeCommandeType::class, $bonDeCommande);
+        
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $bonDeCommande->setUser($security->getUser());
-
+        if ($form->isSubmitted()) {
             $produit = $bonDeCommande->getProduit();
             if ($produit) {
-                $nouvelleQuantite = $produit->getQte() - $bonDeCommande->getQuantite();
+                $quantiteDemandee = $bonDeCommande->getQuantite();
+                $quantiteEnStock = $produit->getQte();
+                
+                if ($quantiteDemandee > $quantiteEnStock) {
+                    // Ajouter un message d'erreur et ne pas persister le bon de commande
+                    $this->addFlash('error', 'La quantité demandée dépasse le stock disponible.');
+                    return $this->renderForm('bon_de_commande/new.html.twig', [
+                        'bon_de_commande' => $bonDeCommande,
+                        'form' => $form,
+                    ]);
+                }
+
+                // Mettre à jour la quantité en stock
+                $nouvelleQuantite = $quantiteEnStock - $quantiteDemandee;
                 $produit->setQte($nouvelleQuantite);
 
-                // Vérifier si le stock est faible
-                if ($nouvelleQuantite <= 1) {
+                // Vérifier si le stock est faible et envoyer une alerte
+                if ($nouvelleQuantite <= 5) { // Seuil d'alerte
                     $this->envoyerAlerteStockFaible($produit, $mailer);
                 }
 
                 $entityManager->persist($produit);
             }
 
-            $entityManager->persist($bonDeCommande);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_bon_de_commande_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->isValid()) {
+                $bonDeCommande->setUser($security->getUser());
+                $entityManager->persist($bonDeCommande);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_bon_de_commande_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('bon_de_commande/new.html.twig', [
